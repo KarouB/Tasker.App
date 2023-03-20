@@ -1,12 +1,48 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:Tasker.Coverters"
              x:Class="Tasker.MVVM.Views.MainView"
              Title="MainView">
-    <Grid Margin="15"
-          RowDefinitions=".1*, .3*, .7* ">
+    
+    <ContentPage.Resources>
+        <converters:ColorConverter x:Key="ColorConverter"/>
+    </ContentPage.Resources>
+    
+    <Grid Margin="15" RowDefinitions=".1*, .3*, .7* ">
+        
         <Label Text="Mi Rutina" StyleClass="DarkBlue, Header"/>
-        <Grid Grid.Row="1" BackgroundColor="DarkSalmon"/>
-        <Grid Grid.Row="2" BackgroundColor="DarkViolet"/>
+        
+        <Grid Grid.Row="1" RowDefinitions=".2*, .8*">
+            
+            <Label StyleClass="LightBlue, SubHeader" Text="Categorías"/>
+            
+            <CollectionView Grid.Row="1" ItemsSource="{Binding Categories}">
+                
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout ItemSpacing="5" Orientation="Horizontal"/>
+                </CollectionView.ItemsLayout>
+                
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10">
+                            <VerticalStackLayout Padding="15" Spacing="10">
+                                <Label Style="LightBlue" Text="{Binding PendingTasks, StringFormat='{0} Tareas'}"/>
+                                <Label StyleClass="DarkBlue, CardTittle" Text="{Binding CategoryName}"/>
+                                <ProgressBar Progress=".5" ProgressColor="{Binding Color, Converter={StaticResource ColorConverter}}"/>
+                            </VerticalStackLayout>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                
+            </CollectionView>
+            
+        </Grid>
+        
+        <Grid Grid.Row="2">
+            
+            <Label/>
+            
+        </Grid>
     </Grid>
 </ContentPage>

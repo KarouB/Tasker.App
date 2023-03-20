@@ -19,4 +19,14 @@
         <Setter Property="FontSize" Value="Title"/>
         <Setter Property="VerticalOptions" Value="Center"/>
     </Style>
+
+    <Style Class="SubHeader" TargetType="Label">
+        <Setter Property="FontSize" Value="Small"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
+    </Style>
+
+    <Style Class="CardTittle" TargetType="Label">
+        <Setter Property="FontSize" Value="Small"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+    </Style>
 </ResourceDictionary>
