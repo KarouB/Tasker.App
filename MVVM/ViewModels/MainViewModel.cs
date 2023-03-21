@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PropertyChanged;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -8,6 +9,7 @@ using Tasker.MVVM.Models;
 
 namespace Tasker.MVVM.ViewModels
 {
+    [AddINotifyPropertyChangedInterface]
     public class MainViewModel
     {
         public ObservableCollection<Category> Categories { get; set; }
@@ -15,6 +17,12 @@ namespace Tasker.MVVM.ViewModels
         public MainViewModel()
         {
             FillData();
+            Tasks.CollectionChanged += Tasks_CollectionChanged;
+        }
+
+        private void Tasks_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            UpdateData();
         }
 
         private void FillData()
@@ -39,7 +47,7 @@ namespace Tasker.MVVM.ViewModels
                 {
                     Id = 3,
                     CategoryName = "Compras",
-                    Color = "##b26ecb"
+                    Color = "#b26ecb"
                 },
 
             };
